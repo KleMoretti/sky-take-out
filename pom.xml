@@ -3,28 +3,21 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <parent>
-        <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
+        <groupId>org.springframework.boot</groupId>
         <version>2.7.3</version>
-        <relativePath/>
     </parent>
-
     <groupId>com.sky</groupId>
     <artifactId>sky-take-out</artifactId>
-    <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
+    <version>1.0-SNAPSHOT</version>
     <modules>
         <module>sky-common</module>
         <module>sky-pojo</module>
         <module>sky-server</module>
     </modules>
-
     <properties>
-        <maven.compiler.source>21</maven.compiler.source>
-        <maven.compiler.target>21</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <mybatis.spring>2.2.0</mybatis.spring>
         <lombok>1.18.20</lombok>
         <fastjson>1.2.76</fastjson>
@@ -37,9 +30,7 @@
         <jjwt>0.9.1</jjwt>
         <jaxb-api>2.3.1</jaxb-api>
         <poi>3.16</poi>
-        <wechatpay>0.4.8</wechatpay>
     </properties>
-
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -97,6 +88,12 @@
             </dependency>
 
             <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt</artifactId>
+                <version>${jjwt}</version>
+            </dependency>
+
+            <dependency>
                 <groupId>com.aliyun.oss</groupId>
                 <artifactId>aliyun-sdk-oss</artifactId>
                 <version>${aliyun.sdk.oss}</version>
@@ -108,30 +105,23 @@
                 <version>${jaxb-api}</version>
             </dependency>
 
-            <dependency>
-                <groupId>io.jsonwebtoken</groupId>
-                <artifactId>jjwt</artifactId>
-                <version>${jjwt}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.github.wechatpay-apiv3</groupId>
-                <artifactId>wechatpay-apache-httpclient</artifactId>
-                <version>${wechatpay}</version>
-            </dependency>
-
+            <!-- poi -->
             <dependency>
                 <groupId>org.apache.poi</groupId>
                 <artifactId>poi</artifactId>
                 <version>${poi}</version>
             </dependency>
-
             <dependency>
                 <groupId>org.apache.poi</groupId>
                 <artifactId>poi-ooxml</artifactId>
                 <version>${poi}</version>
             </dependency>
+            <!--微信支付-->
+            <dependency>
+                <groupId>com.github.wechatpay-apiv3</groupId>
+                <artifactId>wechatpay-apache-httpclient</artifactId>
+                <version>0.4.8</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
-
 </project>
