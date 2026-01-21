@@ -52,7 +52,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         //密码比对
         //md5加密
-        password=DigestUtils.md5DigestAsHex(password.getBytes(StandardCharsets.UTF_8));
+        password = DigestUtils.md5DigestAsHex(password.getBytes(StandardCharsets.UTF_8));
         if (!password.equals(employee.getPassword())) {
             //密码错误
             throw new PasswordErrorException(MessageConstant.PASSWORD_ERROR);
@@ -70,13 +70,14 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     /**
      * 新增员工
+     *
      * @param employeeDTO
      */
     @Override
     public void save(EmployeeDTO employeeDTO) {
-        Employee employee =new Employee();
+        Employee employee = new Employee();
 
-        BeanUtils.copyProperties(employeeDTO,employee);
+        BeanUtils.copyProperties(employeeDTO, employee);
 
         employee.setStatus(StatusConstant.ENABLE);
 
@@ -94,19 +95,54 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     /**
      * 员工分页查询
+     *
      * @param employeePageQueryDTO
      * @return
      */
     @Override
     public PageResult pageQuery(EmployeePageQueryDTO employeePageQueryDTO) {
         //开始分页查询
-        PageHelper.startPage(employeePageQueryDTO.getPage(),employeePageQueryDTO.getPageSize());
+        PageHelper.startPage(employeePageQueryDTO.getPage(), employeePageQueryDTO.getPageSize());
 
-        Page<Employee> page= employeeMapper.pageQuery(employeePageQueryDTO);
+        Page<Employee> page = employeeMapper.pageQuery(employeePageQueryDTO);
         //封装结果并返回
         long total = page.getTotal();
-        List<Employee> records= page.getResult();
-        return new PageResult(total,records);
+        List<Employee> records = page.getResult();
+        return new PageResult(total, records);
+    }
+
+    /**
+     * 启用或禁用员工账号
+     *
+     * @param status
+     * @param id
+     */
+    @Override
+    public void startOrStop(Integer status, Long id) {
+        Employee employee = Employee.builder().status(status).id(id).build();
+        employeeMapper.update(employee);
+    }
+
+    /**
+     * 根据id查询员工信息
+     *
+     * @param id
+     * @return
+     */
+    @Override
+    public Employee getById(Long id) {
+        Employee employee = employeeMapper.getById(id);
+        employee.setPassword("******");
+        return employee;
+    }
+
+    @Override
+    public void update(EmployeeDTO employeeDTO) {
+        Employee employee = new Employee();
+        BeanUtils.copyProperties(employeeDTO, employee);
+        employee.setUpdateTime(LocalDateTime.now());
+        employee.setUpdateUser(BaseContext.getCurrentId());
+        employeeMapper.update(employee);
     }
 
 }
