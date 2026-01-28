@@ -90,4 +90,10 @@ public class DishController {
         return Result.success();
     }
 
+    @GetMapping("/list")
+    public Result<List<Dish>> list(Long categoryId){
+        List<Dish> dish = dishService.list(categoryId);
+        return Result.success(dish);
+    }
+
 }
