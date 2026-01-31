@@ -9,9 +9,11 @@ sky:
   redis:
     host: localhost
     port: 6379
-
   alioss:
       endpoint: oss-cn-beijing.aliyuncs.com
       access-key-id: your-access-key-id
       accessKey-key-secret: your-access-key-secret
       bucket-name: your-bucket-name
+  wechat:
+    appid: wx927a98f129e31912
+    secret: d00693a564ae4ee9e4cdcd72490020b6
